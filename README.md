@@ -80,7 +80,7 @@ Main page with a filter for selected dates or locations with a collective chart 
 	
 		Violin, Lollipop, Word Cloud 
 
-- [x] Link to the primary [GitHub Repo](https://github.com/JuliaAlsop/Project-2.git)
+- [x] Link to the primary [GitHub Repo](https://juliaalsop.github.io/Invasion-of-Aliens/)
 
 	
 - [x] Project description:
