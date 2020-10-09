@@ -118,8 +118,8 @@ def getmilitaryBases():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    us_military_bases = session.query(military_bases.COMPONENT, military_bases.SITE_NAME, military_bases.JOINT_BASE, \
-        military_bases.STATE_TERR, military_bases.COUNTRY, military_bases.OPER_STAT).all()
+    us_military_bases = session.query(military_bases.latitude, military_bases.longitude, military_bases.city, \
+        military_bases.zip, military_bases.state).all()
         # .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
     
     for base in us_military_bases:
