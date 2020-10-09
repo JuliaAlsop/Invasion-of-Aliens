@@ -1,5 +1,6 @@
 
 # Dependencies
+import simplejson as json
 import pandas as pd
 import numpy as np
 import os
@@ -72,12 +73,13 @@ def getsightings():
     session = Session(engine)
 
     # Query All Records in the national_ufo_reporting_ctr Database
-    from_date = "04/01/2020"
+    from_date = "04/01/2020, 00:00:00"
 
-    to_date = "04/30/2020"
+    to_date = "04/30/2020, 23:59:59"
 
-    sightings = session.query(nat_ufo_rep_ctr.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary).all()
-        # .filter(nat_ufo_rep_ctr.datetime.between(f"{from_date}", f"{to_date}")).order_by(nat_ufo_rep_ctr.datetime).all()
+    sightings = session.query(nat_ufo_rep_ctr.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, \
+        nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary) \
+        .filter(nat_ufo_rep_ctr.datetime.between(f"{from_date}", f"{to_date}")).order_by(nat_ufo_rep_ctr.datetime).all()
     
     for sighting in sightings:
         print(sighting)
@@ -86,27 +88,46 @@ def getsightings():
     print("Server received request for 'getsightings' api...")
     return jsonify(sightings)
 
-# @app.route("/api/v1.0/nuforcReports")
-# def getsightings():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     # Query All Records in the Nurc Database
-#     sightings = session.query(nuforc_reports.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary).all()
-
-#     for sighting in sightings:
-#         print(sighting)
-#         print(f"Date: {sighting.datetime}, State: {sighting.state}")
-
-#     print("Server received request for 'getsightings' api...")
-#     return jsonify(sightings)
 
 
-# 4. Define what to do when a user hits the /about route
-@app.route("/militaryBases")
-def about():
-    print("Server received request for 'About' page...")
-    return "Welcome to my 'About' page!"
+@app.route("/api/v1.0/Allsightings")
+def getAllsightings():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query All Records in the national_ufo_reporting_ctr Database
+    from_date = "01/01/2000, 00:00:00"
+
+    to_date = "12/31/2007, 23:59:59"
+
+    nuforc_sightings = session.query(nuforc_reports.datetime, nuforc_reports.city, nuforc_reports.state, \
+        nuforc_reports.country, nuforc_reports.shape, nuforc_reports.duration_seconds, nuforc_reports.comments, nuforc_reports.latitude, nuforc_reports.longitude).all()
+        # .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
+    
+    for sighting in nuforc_sightings:
+        print(sighting)
+        # print(f"Date: {sighting.datetime}, State: {sighting.state}")
+
+    print("Server received request for 'getAllsightings' api...")
+    return jsonify(nuforc_sightings)
+
+
+
+@app.route("/api/v1.0/militaryBases")
+def getmilitaryBases():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    us_military_bases = session.query(military_bases.COMPONENT, military_bases.SITE_NAME, military_bases.JOINT_BASE, \
+        military_bases.STATE_TERR, military_bases.COUNTRY, military_bases.OPER_STAT).all()
+        # .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
+    
+    for base in us_military_bases:
+        print(base)
+        # print(f"Date: {sighting.datetime}, State: {sighting.state}")
+
+    print("Server received request for 'getmilitaryBases' api...")
+    return jsonify(us_military_bases)
 
 
 if __name__ == "__main__":
