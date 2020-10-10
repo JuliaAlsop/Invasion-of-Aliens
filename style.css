@@ -49,7 +49,7 @@ body {
   bottom: 5px;
   left: 150px;
   width: 35px;
-  color: rgb(219, 217, 217);
+  color: rgb(116, 247, 104);
 }
 
 /* Adding styles to the aside and filter form */
@@ -69,7 +69,7 @@ select {
   display: block;
   width: 100%;
   padding: 8px;
-  color: #729bbe;
+  color: #20ee31;
   outline: none;
 }
 
@@ -120,22 +120,22 @@ select {
 /* input placeholder color changes */
 .form-control::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #8e979f;
+  color: #75ddc3;
 }
 
 .form-control::-moz-placeholder {
   /* Firefox 19+ */
-  color: #8e979f;
+  color: #75ddc3;
 }
 
 .form-control:-ms-input-placeholder {
   /* IE 10+ */
-  color: #8e979f;
+  color: #75ddc3;
 }
 
 .form-control:-moz-placeholder {
   /* Firefox 18- */
-  color: #8e979f;
+  color: #75ddc3;
 }
 
 /* media queries which will only be activated at specific screen sizes */
@@ -163,7 +163,7 @@ select {
   #table-area tr td:first-child {
     font-size: 1.8em;
     font-weight: bold;
-    background: #1b3146;
+    background: #107c07;
   }
 
   #table-area tr td:last-child {
