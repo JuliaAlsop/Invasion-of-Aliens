@@ -1,6 +1,4 @@
-var data = [
-    {
-     Date / Time,City,State,Shape,Duration,Summary,Posted
+Date / Time,City,State,Shape,Duration,Summary,Posted
 4/30/2020 0:00,Thibodaux,LA,Light,5,"14 Objects in a row, one behind each other and watch one by one disappear. ((Starlink satellites?))",6/25/2020
 4/30/2020 23:49,Saint Petersburg,FL,Other,7 minutes,There were three dots in a straight line slowly moving for a while then boom vanish!,6/25/2020
 4/30/2020 22:43,Edgewood,WA,Unknown,15-20 seconds,"Location of sighting: Edgewood, WA Date: Thursday April 30th Time: 10:43 PM Weather conditions: clear and other stars visible On Thurs",6/25/2020
@@ -1046,5 +1044,4 @@ I was i",6/25/2020
 4/1/2020 4:00,Anderson,SC,Light,30+ minutes,2 lights appeared out of nowhere just down and to the left of the moon. They got closer together after a few minutes. But when we first,6/25/2020
 4/1/2020 3:45,Petersham,MA,Fireball,2+ minutes,"Ok, this is NOT an April fools joke. At 3:45 this morning the sky was crystal clear, looking south/ SW (about 210 degrees) we saw an or",4/9/2020
    
-    }
-]
+    
