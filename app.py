@@ -18,6 +18,7 @@ Base = declarative_base()
 
 import datetime as dt
 from scipy import stats
+from haversine import haversine, Unit
 
 #################################################
 # Database Setup
@@ -48,6 +49,8 @@ Base.prepare(engine, reflect=True)
 nuforc_reports = Base.classes.nuforc_reports
 military_bases = Base.classes.military_bases
 nat_ufo_rep_ctr = Base.classes.national_ufo_reporting_ctr
+sightings_table = Base.classes.sightings
+sightings_vs_bases = Base.classes.sightings_vs_bases
 
 #################################################
 # Flask Setup
@@ -78,8 +81,10 @@ def getsightings():
     to_date = "04/30/2020, 23:59:59"
 
     sightings = session.query(nat_ufo_rep_ctr.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, \
-        nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary) \
+        nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary, nat_ufo_rep_ctr.latitude, nat_ufo_rep_ctr.longitude) \
         .filter(nat_ufo_rep_ctr.datetime.between(f"{from_date}", f"{to_date}")).order_by(nat_ufo_rep_ctr.datetime).all()
+
+    session.close()
     
     for sighting in sightings:
         print(sighting)
@@ -98,11 +103,13 @@ def getAllsightings():
     # Query All Records in the national_ufo_reporting_ctr Database
     from_date = "01/01/2000, 00:00:00"
 
-    to_date = "12/31/2007, 23:59:59"
+    to_date = "12/31/2014, 23:59:59"
 
     nuforc_sightings = session.query(nuforc_reports.datetime, nuforc_reports.city, nuforc_reports.state, \
-        nuforc_reports.country, nuforc_reports.shape, nuforc_reports.duration_seconds, nuforc_reports.comments, nuforc_reports.latitude, nuforc_reports.longitude).all()
-        # .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
+        nuforc_reports.country, nuforc_reports.shape, nuforc_reports.duration_seconds, nuforc_reports.comments, nuforc_reports.latitude, nuforc_reports.longitude) \
+            .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
+
+    session.close()
     
     for sighting in nuforc_sightings:
         print(sighting)
@@ -112,15 +119,16 @@ def getAllsightings():
     return jsonify(nuforc_sightings)
 
 
-
 @app.route("/api/v1.0/militaryBases")
 def getmilitaryBases():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    us_military_bases = session.query(military_bases.latitude, military_bases.longitude, military_bases.city, \
-        military_bases.zip, military_bases.state).all()
-        # .filter(nuforc_reports.datetime.between(f"{from_date}", f"{to_date}")).order_by(nuforc_reports.datetime).all()
+    us_military_bases = session.query(military_bases.latitude, military_bases.longitude, military_bases.object_id, military_bases.component, \
+        military_bases.site_name, military_bases.joint_base, military_bases.state, military_bases.country, military_bases.oper_stat).all()
+        # .filter(military_bases.order_by(military_bases.zip).all()
+    
+    session.close()
     
     for base in us_military_bases:
         print(base)
@@ -128,6 +136,57 @@ def getmilitaryBases():
 
     print("Server received request for 'getmilitaryBases' api...")
     return jsonify(us_military_bases)
+
+
+# @app.route("/api/v1.0/sightingsVsbases")
+# def getsightingsVsbases():
+#     # Create our session (link) from Python to the DB
+#     session = Session(engine)
+
+#     us_military_bases = session.query(sightings_vs_bases.latitude, military_bases.longitude, military_bases.city, \
+#         military_bases.zip, military_bases.state).all()
+#         # .filter(military_bases.order_by(military_bases.zip).all()
+    
+#     for base in us_military_bases:
+#         print(base)
+#         # print(f"Date: {sighting.datetime}, State: {sighting.state}")
+
+#     print("Server received request for 'getsightingsVsbases' api...")
+#     return jsonify(us_military_bases)
+
+
+@app.route("/api/v1.0/loadDistances")
+def loadDistances():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    sightings_vs_bases = Base.classes.sightings_vs_bases
+
+    result = session.query(sightings_vs_bases).delete()
+    print(result)
+
+    session.commit()
+
+    sightings = session.query(sightings_table.seq, sightings_table.latitude, sightings_table.longitude).limit(1)
+    
+    for sighting in sightings:
+        print(sighting)
+        
+        bases = session.query(military_bases.object_id, military_bases.latitude, military_bases.longitude).all()
+
+        for base in bases:
+            sightpoint = (sighting.latitude, sighting.longitude)
+            basepoint = (base.latitude, base. longitude)
+            distance = haversine(sightpoint, basepoint,  unit=Unit.MILES)
+
+            if (distance < 250):
+                print(f"{sighting.seq}, {sighting.latitude}, {sighting.longitude}, {base.object_id}, {base.latitude}, {base.longitude}, {distance}")
+                session.add(sightings_vs_bases(sighting_seq=sighting.seq, base_object_id=base, distance=distance))
+
+    session.commit()
+                 
+    print("Server received request for 'loadDistances' api...")
+    return "Done"
 
 
 if __name__ == "__main__":
