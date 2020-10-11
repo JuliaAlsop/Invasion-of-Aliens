@@ -80,7 +80,7 @@ def getsightings():
 
     to_date = "04/30/2020, 23:59:59"
 
-    sightings = session.query(nat_ufo_rep_ctr.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, \
+    sightings = session.query(nat_ufo_rep_ctr.datetime, nat_ufo_rep_ctr.city, nat_ufo_rep_ctr.state, nat_ufo_rep_ctr.country, \
         nat_ufo_rep_ctr.shape, nat_ufo_rep_ctr.duration, nat_ufo_rep_ctr.summary, nat_ufo_rep_ctr.latitude, nat_ufo_rep_ctr.longitude) \
         .filter(nat_ufo_rep_ctr.datetime.between(f"{from_date}", f"{to_date}")).order_by(nat_ufo_rep_ctr.datetime).all()
 
@@ -155,38 +155,38 @@ def getmilitaryBases():
 #     return jsonify(us_military_bases)
 
 
-@app.route("/api/v1.0/loadDistances")
-def loadDistances():
-    # Create our session (link) from Python to the DB
-    session = Session(engine)
+# @app.route("/api/v1.0/loadDistances")
+# def loadDistances():
+#     # Create our session (link) from Python to the DB
+#     session = Session(engine)
 
-    sightings_vs_bases = Base.classes.sightings_vs_bases
+#     sightings_vs_bases = Base.classes.sightings_vs_bases
 
-    result = session.query(sightings_vs_bases).delete()
-    print(result)
+#     result = session.query(sightings_vs_bases).delete()
+#     # print(result)
 
-    session.commit()
+#     session.commit()
 
-    sightings = session.query(sightings_table.seq, sightings_table.latitude, sightings_table.longitude).limit(1)
+#     sightings = session.query(sightings_table.seq, sightings_table.latitude, sightings_table.longitude).all()
     
-    for sighting in sightings:
-        print(sighting)
+#     for sighting in sightings:
+#         print(sighting)
         
-        bases = session.query(military_bases.object_id, military_bases.latitude, military_bases.longitude).all()
+#         bases = session.query(military_bases.object_id, military_bases.latitude, military_bases.longitude).all()
 
-        for base in bases:
-            sightpoint = (sighting.latitude, sighting.longitude)
-            basepoint = (base.latitude, base. longitude)
-            distance = haversine(sightpoint, basepoint,  unit=Unit.MILES)
+#         for base in bases:
+#             sightpoint = (sighting.latitude, sighting.longitude)
+#             basepoint = (base.latitude, base. longitude)
+#             distance = haversine(sightpoint, basepoint,  unit=Unit.MILES)
 
-            if (distance < 250):
-                print(f"{sighting.seq}, {sighting.latitude}, {sighting.longitude}, {base.object_id}, {base.latitude}, {base.longitude}, {distance}")
-                session.add(sightings_vs_bases(sighting_seq=sighting.seq, base_object_id=base, distance=distance))
+#             if (distance < 250):
+#                 # print(f"{sighting.seq}, {sighting.latitude}, {sighting.longitude}, {base.object_id}, {base.latitude}, {base.longitude}, {distance}")
+#                 session.add(sightings_vs_bases(sighting_seq=sighting.seq, base_object_id=base.object_id, distance=round(distance)))
 
-    session.commit()
-                 
-    print("Server received request for 'loadDistances' api...")
-    return "Done"
+#                 session.commit()
+
+#     print("Server received request for 'loadDistances' api...")
+#     return "Done"
 
 
 if __name__ == "__main__":
