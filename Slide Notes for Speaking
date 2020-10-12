@@ -1,0 +1,88 @@
+Slide Speaking Points Project 2: Invasion of Aliens
+Slide 1: Introduction to our group   JULIA
+ 
+Title: Invasion of Aliens 
+ 
+Opening stmt:
+Hey guys! Today Anna, Julia, & Carolina are going to discuss the invasion of aliens. Are aliens real, are they on Earth, is it all just a dream….we have the data, we have the analysis, you decide…..the truth is out there! 
+ 
+NEXT SLIDE: HISTORY AND BACKGROUND
+Slide 2:  History & BackgroundJULIA
+UFO sightings were chosen as our data set in honor of Halloween and all of the spooky mystery’s UFO data has to offer. In creating the visualizations for this data, we hope to gather unearthly insights into these occurrences.
+ 
+Unidentified Flying Objects have commonly been associated with sightings of aliens and their spacecraft that date as far back as even ancient Egyptians. While sightings didn’t seem to be very common, or maybe just not recorded as well as modern times, sightings have dramatically increased in record over the last 100 years. Over time the military has become a key factor in these sightings with many people holding belief that the military are hiding evidence to validate alien lifeforms and that certain military bases such as area 51 are home to such evidence.
+        	
+While UFO sightings are not a new phenomena, with the introduction of cameras and now media, UFO sightings have become more frequently discussed, researched, and documented. To really visualize the data, we will be implementing one of the most common conspiracy theories of UFO sightings: THE MILITARY. We will be taking a direct look at how hot spot UFO areas relate in location to military bases, if at all. Our bubble map overlay will provide extraterrestrial insight to dissect the military-UFO conspiracy that has intrigued so many for so long. 
+ 
+NEXT SLIDE: ANALYZING THE DATA 
+ 
+ 
+ 
+ 
+Slide 3 : Analyzing the data (MAIN UFO DATA)Anna
+Discuss the process of getting the data and the different programs used to mold data
+ 
+Although there are innumerable websites with UFO recorded sightings, we found the data from Kaggle to have exceptional consistency in its record keeping. Not only were pivotal specifics such as shape, location, and date/time recorded, but also duration of sighting and personal firsthand accounts. Analyzing these various categories gave real insight into the most common information related to each occurrence and really allowed a broad overview of these records. With the vast amount of records at our hands we decided to limit the amount of data to the time period of 2000-2014 for analysis as well as an additional record file for April 2020 sightings. Why mix the 2 files you may ask?? Alien sightings hit a strong increase with more people out of work at the start of the pandemic and these sightings could provide valuable insight. 
+ 
+Programs used to mold data included:
+We used SQL database and pandas to clean and merge the data and also converted csv to json and Geojson file in order to implement the clean data in to interactive charts located on a web page.
+ 
+Why were these programs used:
+ 
+NEXT SLIDE: ANALYZING THE DATA FINAL SLIDE
+Slide 4 : Analyzing the data CONTINUED (MILITARY DATA)Anna
+Discuss the process of getting the data and the different programs used to mold data 
+ 
+Military base dataset contains records on military site name, state, area, object ID etc. After downloaded the dataset from public.opendatasoft.com   
+NEXT SLIDE: REPRESENTING THE DATA 
+
+
+
+
+Slide 5: Representing the DataJULIA
+To provide our users an interactive representation of data, we are implementing various techniques for user ease including: 
+-The use of a bubble map to pinpoint direct locations of occurrences (UFO on 1 layer & Military bases on 2nd layer)
+-A lollipop chart to clearly visualize the different popularity of shapes seen (Circle/Triangle/Light)
+        	Side note: Yes we do realize that technically light is not a shape…but welcome to the spooky and unexplained
+-A word cloud to see the most reported words used to describe the UFO’s 
+-A violin chart to visualize any time correlations or groupings 
+-And finally a pictorial amchart to visualize the data with a new template never used before using a spaceship outline showing the various times in the day that sightings have been reported ******Still under construction by I assure you its a really cute little ship
+NEXT SLIDE: OUR FINDINGS 
+
+
+
+
+Slide 6: Our FindingsJULIA
+ 
+Inconclusive findings related to military bases.
+Reasoning includes: The idea that maybe not all military bases are public knowledge thereby allowing our data to not have enough accurate locations to compare
+                    	       	The military has no visible relationship to UFO’s; and such sightings near bases could stem from the military running private testing procedures and or experimentation that seen to a civilian would seem otherworldly.
+			Viewing the bubble maps there are is a lot of overlay in bases and ufos; this can stem from a few possibilities that we werent able to look more in to detail for including 1. There are a lot of bases around the country, and there are a lot more ufo’s being recorded and 2 that 
+                    	       	
+ 
+Findings Summary:
+The duration of sighting lasted anywhere between 2 seconds to 7 hours (longer duration sightings are reported darker on the bubble map)
+The top 3 shapes mentioned include: (1) Light, (2) Triangle, and a (3) Circle
+Top 3 areas that have the largest hotspot include: The East Coast, West Coast, and the South with the most evenly spread dots via the bubble map
+The most frequent time to report a UFO:
+The top words used to describe the sighting: include shapes; chevron; light; change
+Weird notice: As the eye progresses the map..it appears as though there are less sightings and shorter duration times
+ 
+Other conspiracies we would have liked more time to look in to include:
+        	The correlation between UFO’s and ley lines
+        	The correlation between UFO’s and population size; whether or not its more likely to have more sightings in a city-like environment or in a rural type of area.
+ 
+ 
+NEXT SLIDE GITHUB LINK TO WEBPAGE FOR INTERACTIVE SHOWING OF WEBSITE
+Slide 7 : Github link for reference
+Can click on during powerpoint to show interactiveness of webpage
+https://juliaalsop.github.io/Invasion-of-Aliens/ 
+ 
+NEXT SLIDE IS QUESTIONS AND COMPLETION OF PRESENTATION
+
+
+Slide 8 : Questions for end of presentationGROUP
+COME BACK TO THIS PAGE AFTER SHOWING WEBSITE 
+Final questions over project presentation 
+ 
+FINAL SLIDE IN PRESENTATION 
