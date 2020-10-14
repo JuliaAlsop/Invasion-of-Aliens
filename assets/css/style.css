@@ -66,6 +66,20 @@
   height:80vh;
 }
 
+#violin {
+  transition: margin-left .5s;
+  padding: 20px;
+  margin-left: 5px;
+  height: auto;
+}
+
+#worldCloud{
+  transition: margin-left .5s;
+  padding: 20px;
+  margin-left: 5px;
+  height: auto;
+}
+
 .info {
   padding: 6px 8px;
   font: 14px/16px Arial, Helvetica, sans-serif;
@@ -94,4 +108,9 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.itemHeading{
+  text-decoration: underline;
+  
 }
