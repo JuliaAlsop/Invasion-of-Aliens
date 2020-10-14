@@ -2,11 +2,11 @@ let chart = am4core.create("chartdiv", am4charts.SlicedChart);
 chart.data = [{
   "name": "Night time accounts",
   "value": 200,
-  "color": am4core.color("#390")
+  "color": am4core.color("#3905")
 }, {
   "name": "Day time accounts",
   "value": 300,
-  "color": am4core.color("#7b1")
+  "color": am4core.color("#7b13")
 }];
 
 var series = chart.series.push(new am4charts.PictorialStackedSeries());
