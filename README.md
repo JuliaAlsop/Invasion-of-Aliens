@@ -110,3 +110,5 @@ In order to provide our users an interactive representation of data, we are impl
 
 Additional JS Library will be [amCharts](https://www.amcharts.com/javascript-maps/)
 
+[POWERPOINT PRESENTATION] (https://docs.google.com/presentation/d/1l8-8mABUe06rgeqRk_Xg_nAXywjC4MNKfed-5g9yDFI/edit?usp=sharing)
+
